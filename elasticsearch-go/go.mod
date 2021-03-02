@@ -1,5 +1,5 @@
 module github.com/taylorzhangyx/serviceToolkit/elasticsearch-go
 
-require github.com/elastic/go-elasticsearch/v8 master
-
 go 1.14
+
+require github.com/elastic/go-elasticsearch/v7 v7.11.0
