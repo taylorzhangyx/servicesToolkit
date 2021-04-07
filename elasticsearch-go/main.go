@@ -7,7 +7,21 @@ import (
 )
 
 func main() {
-	es, _ := elasticsearch.NewDefaultClient()
+	es, err := elasticsearch.NewDefaultClient()
+	if err != nil{
+		log.Println("trying to connect failed")
+		log.Println(err)
+		return
+	}
+	log.Println("trying to connect pass")
 	log.Println(elasticsearch.Version)
-	log.Println(es.Info())
+	res, err := es.Info()
+	if err != nil {
+		log.Fatalf("Error getting response: %s", err)
+	}
+
+	defer res.Body.Close()
+	log.Println(res)
+
+	fillDummyIndex(es, 100)
 }
